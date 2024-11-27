@@ -10,7 +10,7 @@ const AppRouting = () =>{
         <>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-                <Route path="/posts/:id" element={<Post/>}/>
+                <Route path="/posts" element={<Post/>}/>
                 <Route path="/gallery" element={<Gallery/>}/>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>

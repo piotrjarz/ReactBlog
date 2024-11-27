@@ -1,3 +1,38 @@
 {
-    
+    "gallery":[
+        {
+            "Id": 1,
+            "ImageName": "TOGKF",
+            "ImageURL": "url",
+            "ImageDesc": "TOGKF Logo",
+            "ImageAuthorId": 1
+        }
+    ],
+    "users":[
+        {
+            "Id": 1,
+            "UserName": "Admin",
+            "UserEmail": "admin@gojublog.pl",
+            "UserPassword": "@dm!n#"
+        }
+    ],
+    "posts":[
+        {
+            "Id": 1,
+            "PostUserId": 1,
+            "PostTitle": "Witam na blogu!",
+            "PostContent": "Witam :D\nOto start bloga o tradycyjnym okinawskim karate Goju Ryu.",
+            "PostLikes":[
+                1
+            ]
+        }
+    ],
+    "comments":[
+        {
+            "Id": 1,
+            "CommentUserId": 1,
+            "CommentPostId": 1,
+            "CommentContent": "Zapraszam do dyskusji :D"
+        }
+    ]
 }
