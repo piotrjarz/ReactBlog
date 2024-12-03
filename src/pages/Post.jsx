@@ -1,53 +1,64 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {useState, useCallback, useEffect} from "react"
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
 
-//Import bootstrapa
-import Container from "react-bootstrap/Container"
-import Card from "react-bootstrap/Card"
-import Button from "react-bootstrap/Button"
-import Row from "react-bootstrap/Row"
+const Post = () => {
+  let param = useParams();
 
-const Post = () =>{
-    let param = useParams();
+  // Ustawianie stanu
+  const [posts, setPosts] = useState([]);
 
-    // Ustawianie useState'ów
-    const [url, setUrl] = useState("http://localhost:8000/posts")
-    const [posts, setPosts] = useState([])
+  // Funkcja pobierająca posty i dopasowująca użytkowników
+  const fetchPosts = useCallback(async () => {
+    const postsResp = await fetch("http://localhost:8000/posts");
+    const postsData = await postsResp.json();
 
-    const fetchPosts = useCallback(async()=>{
-        const resp = await fetch(url);
-        const data = await resp.json();
-        setPosts(data);
-    }, [url]);
+    // Pobieranie użytkowników
+    const usersResp = await fetch("http://localhost:8000/users");
+    const usersData = await usersResp.json();
 
-    useEffect(()=>{
-        fetchPosts();
-    }, [fetchPosts])
+    // Mapowanie postów z użytkownikami
+    const postsWithUsers = postsData.map((post) => ({
+      ...post,
+      user: usersData.find((user) => user.Id === post.PostUserId), // Dopasowanie użytkownika
+      likes: usersData.filter((user) => post.PostLikes.includes(user.Id))
+    }));
 
-    return(
-        <Container>
-            <Row>
-            {
+    setPosts(postsWithUsers);
+  }, []);
 
-                posts.map((post)=>(
-                    <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>{post.PostTitle}</Card.Title>
-                        <Card.Text>
-                        {post.PostContent}
-                        </Card.Text>
-                        <Button variant="primary" onClick={()=>setUrl("/posts")}>
-                            Przejdź do artykułu
-                            </Button>
-                    </Card.Body>
-                    </Card>
-                ))
-            }
-            </Row>
-        </Container>
-    )
-}
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
+
+  return (
+    <Container>
+      <Row>
+        {posts.slice().reverse().map((post) => (
+          <Card style={{ width: "18rem" }} key={post.Id} className="m-3">
+            <Card.Body>
+              <Card.Title>{post.PostTitle}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Autor: {post.user ? post.user.UserName : "Nieznany"} {/* Obsługa braku danych */}
+              </Card.Subtitle>
+              <Card.Text>{post.PostContent}</Card.Text>
+              <Button variant="primary" onClick={() => alert(`Post ID: ${post.Id}`)}>
+                Przejdź do artykułu
+              </Button>
+              <Button variant="success" onClick={()=>{
+                alert(`Polubienia: \n${post.likes.map((user) => user.UserName).join("\n")}`);
+              }}>
+                Polubienia
+              </Button>
+            </Card.Body>
+          </Card>
+        ))}
+      </Row>
+    </Container>
+  );
+};
 
 export default Post;
