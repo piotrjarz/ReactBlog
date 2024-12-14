@@ -4,9 +4,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 const WebNav = () =>{
+
+    const navigate = useNavigate();
+
+    const user = localStorage.getItem("user");
+
+    const handleLougout = () =>{
+        localStorage.removeItem("user");
+        navigate("/login");
+    }
+
     return(
         <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
@@ -39,17 +50,34 @@ const WebNav = () =>{
             <Row>
                 <Nav>
                     <NavDropdown title="Twoje konto" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/users/profile">
-                        Profil
-                        </NavDropdown.Item>
+                        {
+                            user ? (
+                                <>
+                                
+                                <NavDropdown.Item href="/users/profile">
+                                Profil
+                                </NavDropdown.Item>
 
-                        <NavDropdown.Item href="/users/settings">
-                        Ustawienia
-                        </NavDropdown.Item>
+                                <NavDropdown.Item href="/users/settings">
+                                Ustawienia
+                                </NavDropdown.Item>
 
-                        <NavDropdown.Item href="/logout">
-                        Wyloguj się
-                        </NavDropdown.Item>
+                                <NavDropdown.Item href="/login" onClick={handleLougout}>
+                                Wyloguj się
+                                </NavDropdown.Item>
+                                </>
+                            ) : (
+                            <>
+                                <NavDropdown.Item href="/login">
+                                Zaloguj się
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/register">
+                                Zarejestruj się
+                                </NavDropdown.Item>
+                            </>
+                            )
+                        }
+                        
                     </NavDropdown>
                 </Nav>
             </Row>
