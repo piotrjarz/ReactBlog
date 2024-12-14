@@ -4,6 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Row } from "react-bootstrap";
+import {Image} from "react-bootstrap";
+import logo from '../../logo.png'
 import { useNavigate } from "react-router-dom";
 
 
@@ -21,7 +23,8 @@ const WebNav = () =>{
     return(
         <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-        <Navbar.Brand href="#home">Goju Blog</Navbar.Brand>
+            <img src={logo} alt="Logo" style={{width: "60px", height: "60px"}}/>
+        <Navbar.Brand href="/">Goju Blog</Navbar.Brand>
             <Row>
                 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
