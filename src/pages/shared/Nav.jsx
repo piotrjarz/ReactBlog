@@ -14,6 +14,9 @@ const WebNav = () =>{
     const navigate = useNavigate();
 
     const user = localStorage.getItem("user");
+    const admin = localStorage.getItem("admin");
+
+    console.log(typeof(admin))
 
     const handleLougout = () =>{
         localStorage.removeItem("user");
@@ -32,21 +35,24 @@ const WebNav = () =>{
                 <Nav className="me-auto">
                     <Nav.Link href="/">Strona główna</Nav.Link>
                     <Nav.Link href="/posts">Aktualności</Nav.Link>
-
-                    <NavDropdown title="Galeria" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/gallery">
-                        Twoje zdjęcia
-                        </NavDropdown.Item>
-
-                        <NavDropdown.Item href="/gallery">
-                        Wszystkie zdjęcia
-                        </NavDropdown.Item>
-
-                        <NavDropdown.Item href="#action/3.3">
-                        Szukaj zdjęć
-                        </NavDropdown.Item>
-                    </NavDropdown>
                 </Nav>
+                {
+                    (admin === 'true') ? (
+                        <Nav className="me-auto">
+                            <NavDropdown title="Wpisy" id="basic-nav-dropdown">
+                                <NavDropdown.Item href="/posts/mine">
+                                Twoje wpisy
+                                </NavDropdown.Item>
+
+                                <NavDropdown.Item href="/posts/add">
+                                Dodaj wpis
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    ) : (<></>)
+                }
+                
+
                 </Navbar.Collapse>
             </Row>
 
@@ -57,12 +63,8 @@ const WebNav = () =>{
                             user ? (
                                 <>
                                 
-                                <NavDropdown.Item href="/users/profile">
+                                <NavDropdown.Item href="/profile">
                                 Profil
-                                </NavDropdown.Item>
-
-                                <NavDropdown.Item href="/users/settings">
-                                Ustawienia
                                 </NavDropdown.Item>
 
                                 <NavDropdown.Item href="/login" onClick={handleLougout}>

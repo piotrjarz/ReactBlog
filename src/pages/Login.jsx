@@ -21,6 +21,9 @@ const Login = () =>{
 
         if (user) {
             localStorage.setItem("user", JSON.stringify(user));
+            const admin = user.UserIsAdmin;
+            console.log(`Admin ${admin}`)
+            localStorage.setItem("admin", admin);
             if(localStorage.getItem("user")) {
                 navigate("/home");
                 window.location.reload();

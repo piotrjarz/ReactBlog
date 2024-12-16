@@ -1,72 +1,146 @@
 {
-    "gallery":[
-        {
-            "Id": 1,
-            "ImageName": "TOGKF",
-            "ImageURL": "url",
-            "ImageDesc": "TOGKF Logo",
-            "ImageAuthorId": 1
-        }
-    ],
-    "users":[
-        {
-            "Id": 1,
-            "UserName": "Admin",
-            "UserEmail": "admin@gojublog.pl",
-            "UserPassword": "@dm!n#"
-        },
-        {
-            "Id": 2,
-            "UserName": "GojuFan",
-            "UserEmail": "gojufan@gojublog.pl",
-            "UserPassword": "maslo123"
-        }
-    ],
-    "posts":[
-        {
-            "Id": 1,
-            "PostUserId": 1,
-            "PostTitle": "Witam na blogu!",
-            "PostContent": "Witam :D\nOto start bloga o tradycyjnym okinawskim karate Goju Ryu.",
-            "PostLikes":[
-                1
-            ]
-        },
-        {
-            "Id": 2,
-            "PostUserId": 2,
-            "PostTitle": "Kata Gekisai dai ichi",
-            "PostContent": "Kata Gekisai dai ichi (uderzyć i zniszczyć numer jeden)",
-            "PostLikes":[
-
-            ]
-        },
-        {
-            "Id": 3,
-            "PostUserId": 2,
-            "PostTitle": "Kata Gekisai dai ni",
-            "PostContent": "Kata Gekisai dai ni (uderzyć i zniszczyć numer dwa)",
-            "PostLikes":[
-                1,
-                2
-            ]
-        },
-        {
-            "Id": 4,
-            "PostUserId": 1,
-            "PostTitle": "Kata Saifa",
-            "PostContent": "Kata Saifa (niszczące uderzenie)",
-            "PostLikes":[
-                1,2
-            ]
-        }
-    ],
-    "comments":[
-        {
-            "Id": 1,
-            "CommentUserId": 1,
-            "CommentPostId": 1,
-            "CommentContent": "Zapraszam do dyskusji :D"
-        }
-    ]
+  "gallery": [
+    {
+      "Id": 1,
+      "ImageName": "TOGKF",
+      "ImageURL": "url",
+      "ImageDesc": "TOGKF Logo",
+      "ImageAuthorId": 1,
+      "id": "c758"
+    }
+  ],
+  "users": [
+    {
+      "Id": 1,
+      "UserName": "Admin",
+      "UserEmail": "admin@gojublog.pl",
+      "UserPassword": "@dm!n#",
+      "UserIsAdmin": true,
+      "id": "f02a"
+    },
+    {
+      "Id": 2,
+      "UserName": "GojuFan",
+      "UserEmail": "gojufan@gojublog.pl",
+      "UserPassword": "maslo123",
+      "UserIsAdmin": true,
+      "id": "c71f"
+    },
+    {
+      "Id": 3,
+      "UserName": "Placek",
+      "UserEmail": "jacek.placek@gmail.com",
+      "UserPassword": "Placek123",
+      "UserIsAdmin": false
+    },
+    {
+      "id": "dba5",
+      "Id": "1",
+      "UserName": "Andrew",
+      "UserEmail": "andrew@schulz.com",
+      "UserPassword": "andrew123",
+      "UserIsAdmin": false
+    }
+  ],
+  "posts": [
+    {
+      "Id": 1,
+      "PostUserId": 1,
+      "PostTitle": "Witam na blogu!",
+      "PostContent": "Witam :D\nOto start bloga o tradycyjnym okinawskim karate Goju Ryu.",
+      "PostLikes": [
+        1
+      ],
+      "id": "dc37"
+    },
+    {
+      "Id": 2,
+      "PostUserId": 2,
+      "PostTitle": "Kata Gekisai dai ichi",
+      "PostContent": "Kata Gekisai dai ichi (uderzyć i zniszczyć numer jeden)",
+      "PostLikes": [],
+      "id": "c852"
+    },
+    {
+      "Id": 3,
+      "PostUserId": 2,
+      "PostTitle": "Kata Gekisai dai ni",
+      "PostContent": "Kata Gekisai dai ni (uderzyć i zniszczyć numer dwa)",
+      "PostLikes": [
+        1,
+        2
+      ],
+      "id": "a407"
+    },
+    {
+      "Id": 4,
+      "PostUserId": 1,
+      "PostTitle": "Kata Saifa",
+      "PostContent": "Kata Saifa (niszczące uderzenie)",
+      "PostLikes": [
+        1,
+        2
+      ],
+      "id": "c1c6"
+    },
+    {
+      "id": "bdce",
+      "PostTitle": "Kata Seiyunchin",
+      "PostContent": "To bardzo stare kata, jednak wciąż piękne i eleganckie.\nNa sam widok osoby wykonującej kata widać, że korzenie formy sięgają Chin. Prawdopodobne jest, że forma pochodzi z jednego z chińskich systemów samoobrony zwanej Heing. \nPóźniej została sprowadzona na Okinawę i tak jak inne chińskie formy, “przystosowana” do okinawskich warunków. \nWszystkie techniki w kata to techniki ręczne, nie występują tu kopnięcia. Forma wyrabia stabilną i niezłomną postawę. Różne wersje tej formy ćwiczone są w kilku stylach karate, np. Goju Ryu, Shito Ryu. Seiyunchin tłumaczyć można jako “spokojny marsz”.",
+      "PostUserId": 2,
+      "PostLikes": [],
+      "Id": 5
+    }
+  ],
+  "comments": [
+    {
+      "Id": 1,
+      "CommentUserId": 1,
+      "CommentPostId": 1,
+      "CommentContent": "Zapraszam do dyskusji :D",
+      "id": "0bd2"
+    },
+    {
+      "id": "4f0b",
+      "Id": 2,
+      "CommentUserId": 1,
+      "CommentPostId": 1,
+      "CommentContent": "Testowanie komentarzy"
+    },
+    {
+      "id": "b4f1",
+      "Id": 1,
+      "CommentUserId": 2,
+      "CommentPostId": 2,
+      "CommentContent": "Moje ulubione kata :D"
+    },
+    {
+      "id": "280c",
+      "Id": 1,
+      "CommentUserId": 2,
+      "CommentPostId": 3,
+      "CommentContent": "Fajne kata"
+    },
+    {
+      "id": "6b9a",
+      "Id": 3,
+      "CommentUserId": 2,
+      "CommentPostId": 1,
+      "CommentContent": "Super :D"
+    },
+    {
+      "id": "0827",
+      "Id": 4,
+      "CommentUserId": 2,
+      "CommentPostId": 3,
+      "CommentContent": "Lubię je"
+    },
+    {
+      "id": "d43f",
+      "Id": 5,
+      "CommentUserId": 2,
+      "CommentPostId": 3,
+      "CommentContent": "Test"
+    }
+  ]
 }

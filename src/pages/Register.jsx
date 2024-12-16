@@ -36,7 +36,13 @@ const Register = () => {
         return;
       }
 
-      const newUser = { username, password };
+      const newUser = { 
+        Id: users[users.length-1] + 1,
+        UserName: username, 
+        UserEmail: email,
+        UserPassword: password,
+        UserIsAdmin: false
+      };
       await fetch("http://localhost:8000/users", {
         method: "POST",
         headers: {
