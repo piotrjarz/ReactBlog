@@ -44,7 +44,6 @@ const MyPosts = () =>{
 
     const handleShowLikes = (likes) => {
       setLikedUsers(likes.map(user => user.UserName)); // Zbieramy nazwy użytkowników, którzy polubili
-      console.log(likedUsers)
       setShowModal(true); // Pokazujemy modal
     };
 

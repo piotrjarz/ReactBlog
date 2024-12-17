@@ -22,7 +22,6 @@ const Login = () =>{
         if (user) {
             localStorage.setItem("user", JSON.stringify(user));
             const admin = user.UserIsAdmin;
-            console.log(`Admin ${admin}`)
             localStorage.setItem("admin", admin);
             if(localStorage.getItem("user")) {
                 navigate("/home");
@@ -45,7 +44,7 @@ const Login = () =>{
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleLogin}>
             <Form.Group className="mb-3" controlId="username">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Nazwa użytkownika</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Nazwa użytkownika"
@@ -55,7 +54,7 @@ const Login = () =>{
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Hasło</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Hasło"

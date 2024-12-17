@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Container, Card, Row, Col, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';  // Importujemy Link do nawigacji
 
-const Gallery = () => {
+const MyGallery = () => {
   const [gallery, setGallery] = useState([]);
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   // Pobranie danych o galeriach i postach z serwera
   useEffect(() => {
@@ -14,7 +16,11 @@ const Gallery = () => {
         // Pobieramy dane o obrazach z galerii
         const galleryResponse = await fetch('http://localhost:8000/gallery');
         const galleryData = await galleryResponse.json();
-        setGallery(galleryData);
+
+        const myGallery = galleryData.filter( (img) => Number(img.ImageAuthorId) === Number(user.id));
+
+
+        setGallery(myGallery);
 
         // Pobieramy dane o postach
         const postsResponse = await fetch('http://localhost:8000/posts');
@@ -32,11 +38,12 @@ const Gallery = () => {
 
   return (
     <Container>
-      <h3>Galeria</h3>
+      
 
       {error && <Alert variant="danger">{error}</Alert>}
 
       <Row className="gx-4 gy-4 justify-content-center">
+      <h3>Galeria</h3>
         {gallery.map((image) => {
           // Sprawdzamy, czy obrazek ma powiązanie z jakimkolwiek postem
           const postId = Number(image.ImagePostId); // Zakładając, że jest tylko jeden post powiązany z obrazkiem
@@ -72,4 +79,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default MyGallery;

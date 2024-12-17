@@ -1,0 +1,10 @@
+.a-custom-danger{
+    text-decoration: underline;
+    color: darkred !important;
+    text-align: right;
+    
+}
+
+.a-custom-danger:hover{
+    cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, Container } from "react-bootstrap";
 
 const AddPost = () => {
   // Stan dla formularza
@@ -56,7 +56,7 @@ const AddPost = () => {
   };
 
   return (
-    <div>
+    <Container>
       <h3>Dodaj nowy wpis</h3>
       {error && <Alert variant="danger">{error}</Alert>}
       {success && <Alert variant="success">Wpis został dodany!</Alert>}
@@ -86,7 +86,7 @@ const AddPost = () => {
           Dodaj wpis
         </Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

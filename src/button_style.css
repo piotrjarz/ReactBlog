@@ -46,3 +46,12 @@
     background: linear-gradient(135deg, #c82333, #bd2130);
   }
   
+  .btn-custom-warning {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    border: none;
+  }
+  
+  .btn-custom-warning:hover {
+    background: linear-gradient(135deg, #e0a800, #d39e00);
+  }
+  

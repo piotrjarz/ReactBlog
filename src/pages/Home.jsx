@@ -23,7 +23,7 @@ const Home = () => {
       {/* Sekcja ogólnych informacji o Goju-Ryu */}
       <Row className="my-5">
         <Col>
-          <Card className="text-white bg-primary mb-3">
+          <Card className="mb-3">
             <Card.Body>
               <h1>Witaj na blogu o Goju-Ryu!</h1>
               <p>

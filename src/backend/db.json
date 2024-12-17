@@ -1,11 +1,20 @@
 {
   "gallery": [
     {
-      "id": "1",
-      "ImageName": "TOGKF",
-      "ImageURL": "url",
-      "ImageDesc": "TOGKF Logo",
-      "ImageAuthorId": 1
+      "id": "2",
+      "ImageName": "Gekisai dai Ichi",
+      "ImageDesc": "Kata Gekisai dai Ichi - prezentacja",
+      "ImageURL": "https://karatetraining.org/weblog/wp-content/uploads/2022/03/Gekisai_dai_ichi.jpg",
+      "ImageAuthorId": "1",
+      "ImagePostId": 3
+    },
+    {
+      "id": "3",
+      "ImageName": "Saifa",
+      "ImageDesc": "Przedstawienie kata Saifa",
+      "ImageURL": "https://i.pinimg.com/474x/2d/36/04/2d3604b2d636b52970de7e4b0154290d.jpg",
+      "ImageAuthorId": "1",
+      "ImagePostId": 4
     }
   ],
   "users": [
@@ -44,34 +53,26 @@
       "PostUserId": 1,
       "PostTitle": "Witam na blogu!",
       "PostContent": "Witam :D\nOto start bloga o tradycyjnym okinawskim karate Goju Ryu.",
-      "PostLikes": [
-        1
-      ]
-    },
-    {
-      "id": "2",
-      "PostUserId": 2,
-      "PostTitle": "Kata Gekisai dai ichi",
-      "PostContent": "Kata Gekisai dai ichi (uderzyć i zniszczyć numer jeden)",
       "PostLikes": []
     },
     {
       "id": "3",
       "PostUserId": 2,
-      "PostTitle": "Kata Gekisai dai ni",
-      "PostContent": "Kata Gekisai dai ni (uderzyć i zniszczyć numer dwa)",
+      "PostTitle": "Kata Gekisai dai Ich, Ni",
+      "PostContent": "Kata Gekisai dai ni (uderzyć i zniszczyć numer dwa)\nAutoremkata01 form jest twórca stylu Goju Ryu  - Chojun Miyagi. Kanji „Geki” oznacza „walczyć” („uderzać”, „demolować”) natomiast „Sai” – „łamać”. Całość Gekisai można zinterpretować jako „atakować i zniszczyć” co prawdopodobnie miało odnosić się do żołnierzy amerykańskich walczących z Japonią  podczas II Wojny Światowej. Ciekawostką jest to, że ze względu na istotną różnicę we wzroście amerykańskich i japońskich (okinawskich) żołnierzy, ciosy w Gekisai oddawane były wyżej niż na wysokość głowy.\n\n\nIch historia sięga początku lat ’40 XXw., w których wkładano wiele siły w promowanie karate przez co sztuka ta stawała się coraz bardziej popularna. Forma Gekisai Ichi narodziła się jakby z potrzeby, gdyż oryginalne kata Goju Ryu były zbyt trudne dla nowych adeptów karate, którymi coraz częściej były dzieci i młodzież.\n\nJedna z wersji mówi, że dla uczniów początkujących powstały formy o nazwie Hookiyu Kata, w skład których wchodziły Fukyu Ich – której autorem był Soschin Nagamine (Matsubayashi Ryu) i Fykyu Ni autorstwa Chojuna Miyagi.. Są to typowe kata Goju Ryu (Naha-Te) z silnymi blokami, uderzeniami i stabilnymi pozycjami, lecz widać w nich wpływy Shuri-Te, systemu samoobrony nauczanego przez wielkiego mistrza Yasutsune Itosu. Mimo, że Gekisai Ichi jest najprostszą formą Goju Ryu, to składa się z 10 różnych technik wykonywanych naprzemiennie.",
       "PostLikes": [
-        1,
-        2
+        2,
+        1
       ]
     },
     {
       "id": "4",
       "PostUserId": 1,
       "PostTitle": "Kata Saifa",
-      "PostContent": "Kata Saifa (niszczące uderzenie)",
+      "PostContent": "Kata Saifa (niszczące uderzenie)\nKata ma typowo chińskie pochodzenie. Na Okinawę sprowadził je mistrz Kanryo Higaonna, choć niektóre źródła podają, że to właśnie Higaonna jest jej twórcą. Inne źródła podają (co jest mniej prawdopodobne), że to sensei Miyagi jest jej twórcą.\n\nKanji „Sai” oznacza „łamać” a „Ha” – „rozdzierać” („Ha” w dialekcie okinawskim to „Fa”)\n\nWystępują w nim prowadzone po okręgu uderzenia tetsui w głowę, podwójne uderzenia, oraz kopnięcia mae geri stojąc na jednej nodze. Wykonywanie kata wymaga odpowiedniego rozluźnienia ciała, na tym etapie ważna jest już praca bioder i utrzymywanie odpowiedniego balansu.\n\nCiekawe jest to, że po punkcie kulminacyjnym kiai występuje jeszcze „dobicie przeciwnika”. W dawnych czasach od tego Kata zaczynano naukę Goju Ryu, potem stworzono Kata Gekisai.",
       "PostLikes": [
-        1
+        1,
+        3
       ]
     },
     {
@@ -80,6 +81,50 @@
       "PostContent": "To bardzo stare kata, jednak wciąż piękne i eleganckie.\nNa sam widok osoby wykonującej kata widać, że korzenie formy sięgają Chin. Prawdopodobne jest, że forma pochodzi z jednego z chińskich systemów samoobrony zwanej Heing. \nPóźniej została sprowadzona na Okinawę i tak jak inne chińskie formy, “przystosowana” do okinawskich warunków. \nWszystkie techniki w kata to techniki ręczne, nie występują tu kopnięcia. Forma wyrabia stabilną i niezłomną postawę. Różne wersje tej formy ćwiczone są w kilku stylach karate, np. Goju Ryu, Shito Ryu. Seiyunchin tłumaczyć można jako “spokojny marsz”.",
       "PostUserId": 2,
       "PostLikes": []
+    },
+    {
+      "id": "6",
+      "PostTitle": "Kata Shisochin",
+      "PostContent": "Kata Shisochin (walka w czterech kierunkach)\nTypowo chińskie kata rozpoczynające się podobnie jak Sanseru, z tym, że z otwartymi dłońmi. Kładzie nacisk na walkę w czterech kierunkach. Występują tu elementy przechwytywania ramion przeciwnika i zakładania dźwigni.\n\nCharakterystyczne są tu techniki pchnięć, które ustawiają przeciwnika we właściwym dystansie, po którym następuje szybki i wykonywany z dużą szybkością atak.",
+      "PostUserId": "1",
+      "PostLikes": []
+    },
+    {
+      "id": "7",
+      "PostTitle": "Kata Sanseru",
+      "PostContent": "Kata Sanseru (trzydzieści sześć)\nNiewiele informacji zachowało się o historii Sanseru. Nazywane jako „kata smoka” ze względu na swoje ciężkie i silne ruchy. Początek kata wygląda jak najbardziej zaawansowane formy Goju Ryu takie jak Suparinpei czy Kururunfa. Lecz jest to forma zupełnie inna. Charakteryzują ja krótkie ruchy kończące się twardym i zdecydowanym atakiem. Walczymy poruszając się w czterech kierunkach. Forma nie jest tak skomplikowana jak inne  kata Goju Ryu, wymaga jednak olbrzymiej siły fizycznej i szybkości. Niemniej jednak jest to bardzo trudne do opanowania i skomplikowane kata. Preferowana przez zawodników o mocnej budowie. Kata uczy walki z przeciwnikiem o słabszych warunkach fizycznych.",
+      "PostUserId": "1",
+      "PostLikes": []
+    },
+    {
+      "id": "8",
+      "PostTitle": "Kata Sepai",
+      "PostContent": "Kata Sepai (osiemnaście)\nKata pochodzi z Chin.\n\nNazwę tłumaczyć można jako „osiemnaście rąk,  lub osiemnaście” a w kata można doliczyć się 18 obrotowych ruchów ciała. Specyfiką są uderzenia po łuku (Furi Uchi) i zejścia z linii ataku dlatego preferują je osoby szybkie i lekkie, choć występują ciężkie i silne ciosy, np. Ura Zuki. Wykonujący Seipai zawodnik używa swoich rąk i nóg jak bicza.\n\nForma ta praktykowana jest do dziś w kilku stylach karate np. Goju Ryu, Shito Ryu (zachowały się fotografie pokazujące mistrza Kenwa Mabuni twórcę Shito-Ryu wykonującego formę Sepai). Kata uczy walki z  przeciwnikiem mającym przewagę fizyczną.",
+      "PostUserId": "1",
+      "PostLikes": []
+    },
+    {
+      "id": "9",
+      "PostTitle": "Kata Seisan",
+      "PostContent": "Kata Seisan (trzynaście)\nKata stylu Shorin Ryu, lecz wiadome jest, że korzenie Sai-san sięgają Chin. Nazwa pochodzi od imienia chińskiego mistrza Seisan (ew. Sesan lub Seishan), który żył na Okinawie około 1700 roku. W późniejszych latach w związku z ta formą pojawia się nazwisko Takahara Peichin a następnie Tode Sakugawa. Sei-San praktykowali i udoskonalali również inni wielcy mistrzowie między innymi Sokon Matsumura, Yasutsune Itosu i Chotoku Kyan.\n\nUnikalną rzeczą jeżeli chodzi o tę formę jest fakt, że istnieją dwie zupełnie różne wersje (jedna pochodzi z Naha-Te, i ćwiczona dziś w Goju Ryu, a druga z Shuri-Te).\n\nPodobnie jak kata Ananku, Sei-San charakteryzują obroty wokół osi ciała oraz obroty głowy i ruchy okrężne rąk i nóg. Ruchy stóp maja na celu dostanie się pomiędzy nogi przeciwnika i atak poprzez zniszczenie jego równowagi. Kata przypomina walkę w kilkoma przeciwnikami atakującymi z różnych stron.\nForma ta jest uważana za jedną z najstarszych form praktykowanych do dziś.",
+      "PostUserId": "1",
+      "PostLikes": []
+    },
+    {
+      "id": "10",
+      "PostTitle": "Kata Kururunfa",
+      "PostContent": "Kata Kururunfa.\nKururunfa (Kururunha) to niejako wstęp do Suparinpei.\n \nAby prawidłowo je wykonywać, karateka powinien mieć bardzo dobrze opanowane wszystkie wcześniejsze formy.\n\nWystępują tu szybkie i dynamiczne obroty ciała w bliskim kontakcie z partnerem. Dużo technik zadawanych łokciem, będących jednocześnie blokiem i atakiem. Widoczne jest naprzemienne wykorzystywanie twardości i miękkości. Charakterystycznym elementem jest widowiskowe uwolnienie się od chwytu, uderzenie tylną częścią głowy i rzut z przysiadem z rękoma ustawionymi jak cięcie mieczem.\n\nKururunfa razem z Suparinpei stanowią esencję stylu Goju Ryu. Jest to przedostatnie kata tego stylu pod względem zaawansowania technicznego.",
+      "PostUserId": "1",
+      "PostLikes": []
+    },
+    {
+      "id": "11",
+      "PostTitle": "Kata Suparimpei",
+      "PostContent": "Kata Suparimpei (Pechurin).\nNajbardziej zaawansowane kata Goju Ryu zawierające 108 technik. Chińska nazwa tej formy to Pechurin. Legenda głosi, że ok. 1600 roku w Chinach żyła grupa Wojowników, która grabiła bogatych lordów i rozdawała biednym. Było ich 108. Złożyli oni przysięgę walki z niesprawiedliwością, poszukiwania oświecenia i ucieczki od 108 śmiertelnych pasji poprzez praktykowanie sztuk walki i mając jako bazę formę składającą się ze 108 ruchów – Suparinpei.\n\nMówi się, że jeden (lub kilku) z Wojowników przedostał się na Okinawę i nauczał swojej formy. Inna wersja tej legendy głosi, że Suparinpei zostało stworzone na cześć tych 108 wojowników.\n\nPodobnie jak Kururunfa, Suparinpei wyraża prawdziwą naturę Goju Ryu(połączenie go-twardości i ju- miękkości).  W formach tych znajduje się wiele ukrytych technik i znaczeń. Bloki są jednocześnie atakami (Hiji Uke/Uchi). Przejścia w niektórych pozycjach wykonywane są po linii prostej. Po i w czasie techniki ręka nie zawsze wraca do hikite. Wygląda to tak, jakby techniki były skrócone ale ogromną rolę odgrywa tutaj praca całego ciała. Dotyczy się to zarówno technik Tsuki jak i Uke oraz Uchi. By zacząć ćwiczenia Suparinpei trzeba najpierw rozumieć i dobrze opanować kata Sanchin i Seisan.\n\nW niektórych szkołach Goju Ryu forma ta nie jest prezentowana uczniom, którzy trenują krócej jak 10 lat…",
+      "PostUserId": "1",
+      "PostLikes": [
+        1
+      ]
     }
   ],
   "comments": [
@@ -114,18 +159,6 @@
       "CommentContent": "Super :D"
     },
     {
-      "id": "6",
-      "CommentUserId": 2,
-      "CommentPostId": 3,
-      "CommentContent": "Lubię je"
-    },
-    {
-      "id": "7",
-      "CommentUserId": 2,
-      "CommentPostId": 3,
-      "CommentContent": "Test"
-    },
-    {
       "id": "9",
       "CommentUserId": "4",
       "CommentPostId": 4,
@@ -142,6 +175,18 @@
       "CommentUserId": "4",
       "CommentPostId": 5,
       "CommentContent": "Lubię to kata"
+    },
+    {
+      "id": "13",
+      "CommentUserId": "1",
+      "CommentPostId": 3,
+      "CommentContent": "Mało coś jest w tym wpisie"
+    },
+    {
+      "id": "14",
+      "CommentUserId": "1",
+      "CommentPostId": 3,
+      "CommentContent": "Proszę o poprawienie postu"
     }
   ]
 }

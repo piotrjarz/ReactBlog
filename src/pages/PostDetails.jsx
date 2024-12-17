@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Form, Row, Col, Alert, Card, ListGroup, Button, Modal } from "react-bootstrap";
-import like from "../like.png"
+//import like from "../like.png"
+import like from "../like.svg"
 
 // CSS
 import "../img_hover.css"
+import "../a_custom.css"
 
 const PostDetails = () => {
   const { id } = useParams(); // Pobierz id z URL
@@ -22,6 +24,8 @@ const PostDetails = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [commentToDelete, setCommentToDelete] = useState(null)
+
+  const [likesCount, setLikesCount] = useState(0);
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -54,16 +58,12 @@ const PostDetails = () => {
 
         const userComments = usersData.filter( (user) => userIds.includes(Number(user.id)));
 
-        
-
-        
+        setLikesCount(postData.PostLikes.length);
 
         setPost(postData);
         setComments(commentsData);
         
         setUsers(userComments);
-        console.log((userComments))
-        //console.log((users))
         
         } catch (err) {
         setError(err.message);
@@ -101,7 +101,7 @@ const PostDetails = () => {
         throw new Error("Nie udało się dodać komentarza");
       }
 
-      setComments([...comments, commentToAdd]); // Aktualizuj lokalną listę komentarzy
+      setComments((prevComments) => [...prevComments, commentToAdd]); // Aktualizuj lokalną listę komentarzy
       setNewComment(""); // Resetuj pole formularza
       setSuccess("Dodano komentarz pomyślnie!");
     } catch (err) {
@@ -128,33 +128,27 @@ const PostDetails = () => {
 
   const handleLikePost = async () =>{
     if(post){
-
-        // Tworzymy nową kopię tablicy polubień
-    const postLikes = post.PostLikes.includes(Number(user.id))
-  ? post.PostLikes.filter((id) => id !== Number(user.id)) // Usuwamy polubienie
-  : [...post.PostLikes, Number(user.id)]; // Dodajemy polubienie
-
+        const postLikes = post.PostLikes.includes(Number(user.id))
+      ? post.PostLikes.filter((id) => id !== Number(user.id)) // Usuwamy polubienie
+      : [...post.PostLikes, Number(user.id)]; // Dodajemy polubienie
       
-      
-      console.log(`Likes: ${postLikes}`);
-
-      const resp = await fetch(`http://localhost:8000/posts/${post.id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body : JSON.stringify({
-          PostLikes: postLikes
+        
+        const resp = await fetch(`http://localhost:8000/posts/${post.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body : JSON.stringify({
+            PostLikes: postLikes
+          })
         })
-      })
-      if(resp.ok) {
-        console.log("Sukces!")
+        
+        setPost((prevPost) => ({
+          ...prevPost,
+          PostLikes: postLikes, // Zaktualizowany stan polubień
+        }));
+        setLikesCount(postLikes.length);
       }
-      setPost((prevPost) => ({
-        ...prevPost,
-        PostLikes: postLikes, // Zaktualizowany stan polubień
-      }));
-    }
   }
 
   const handleShowDeleteModal = (commentId) => {
@@ -173,7 +167,6 @@ const PostDetails = () => {
         method: "DELETE"
       })
       if(resp.ok){
-        console.log(`Usunięto komentarz o id = ${commentToDelete}`);
         setComments(prevComments => prevComments.filter(comment => Number(comment.id) !== Number(commentToDelete)))
       }
       else{
@@ -195,6 +188,7 @@ const PostDetails = () => {
             </Card.Body>
             <Card.Footer>
               <Card.Text>Podoba ci się ten wpis? Polub go!</Card.Text>
+              <p><strong>Polubienia: </strong>{likesCount}</p>
             <img src={like} alt="like"  style={{width: "30px", height: "30px"}} onClick={handleLikePost}/>
             </Card.Footer>
           </Card>
@@ -216,15 +210,11 @@ const PostDetails = () => {
                       <div>{comment.CommentContent}</div>
                     </Col>
                     <Col>
-                      <div className="d-flex flex-column">
-                        {/* Treść komentarza */}
-                        
-
-                        {/* Przyciski do usuwania komentarza, tylko jeśli użytkownik jest administratorem lub to jego komentarz */}
+                      <div className="d-flex flex-column align-items-end">
                         {((admin === 'true') || (Number(comment.CommentUserId) === Number(user.id))) && (
-                          <Button variant="danger" onClick={() => handleShowDeleteModal(comment.id)} style={{ width: 'auto', marginTop: '10px' }}>
+                          <a className="a-custom-danger" onClick={() => handleShowDeleteModal(comment.id)} style={{ width: 'auto', marginTop: '10px' }}>
                             Usuń komentarz
-                          </Button>
+                          </a>
                         )}
                       </div>
                     </Col>

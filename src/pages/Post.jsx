@@ -53,7 +53,6 @@ const Post = () => {
 
   const handleShowLikes = (likes) => {
     setLikedUsers(likes.map(user => user.UserName)); // Zbieramy nazwy użytkowników, którzy polubili
-    console.log(likedUsers)
     setShowModal(true); // Pokazujemy modal
   };
 
@@ -65,7 +64,6 @@ const Post = () => {
         method: "DELETE"
       })
       if(resp.ok){
-        console.log(`Usunięto post o id = ${postToDelete}`);
         setPosts(prevPosts => prevPosts.filter(post => Number(post.id) !== Number(postToDelete)))
       }
       else{
@@ -124,6 +122,7 @@ const Post = () => {
                 variant="primary"
                 size="m" /* Zastosowanie mniejszego rozmiaru */
                 href={`/posts/${post.id}`}
+                className="btn-custom mt-auto"
               >
                 Przejdź do artykułu
               </Button>
@@ -131,21 +130,33 @@ const Post = () => {
                 variant="success"
                 size="m" /* Zastosowanie mniejszego rozmiaru */
                 onClick={() => handleShowLikes(post.likes)}
+                className="btn-custom btn-custom-success mt-auto"
               >
                 Polubienia
               </Button>
             </div>
 
             {admin === "true" && (
-              <div className="d-flex justify-content-center mt-2">
+              <>
+              <div className="d-flex justify-content-between mt-2">
                 <Button
                   variant="danger"
-                  size="m" /* Zastosowanie mniejszego rozmiaru */
+                  size="m" 
                   onClick={() => handleShowDeleteModal(post.id)}
+                  className="btn-custom btn-custom-danger mt-auto"
                 >
                   Usuń post
                 </Button>
+                <Button
+                  variant="warning"
+                  size="m" /* Zastosowanie mniejszego rozmiaru */
+                  href={`/posts/edit/${post.id}`}
+                  className="btn-custom btn-custom-warning mt-auto"
+                >
+                  Edytuj Post
+                </Button>
               </div>
+              </>
             )}
           </Card.Body>
         </Card>
