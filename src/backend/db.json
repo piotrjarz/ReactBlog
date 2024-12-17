@@ -71,8 +71,7 @@
       "PostTitle": "Kata Saifa",
       "PostContent": "Kata Saifa (niszczące uderzenie)",
       "PostLikes": [
-        1,
-        2
+        1
       ]
     },
     {
@@ -127,12 +126,6 @@
       "CommentContent": "Test"
     },
     {
-      "id": "8",
-      "CommentUserId": "1",
-      "CommentPostId": 5,
-      "CommentContent": "Nigger"
-    },
-    {
       "id": "9",
       "CommentUserId": "4",
       "CommentPostId": 4,
@@ -145,10 +138,10 @@
       "CommentContent": "Bruh"
     },
     {
-      "id": "11",
+      "id": "12",
       "CommentUserId": "4",
-      "CommentPostId": 4,
-      "CommentContent": "Aaaa"
+      "CommentPostId": 5,
+      "CommentContent": "Lubię to kata"
     }
   ]
 }

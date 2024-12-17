@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { Container, Form, Row, Col, Alert, Card, ListGroup, Button, Modal } from "react-bootstrap";
 import like from "../like.png"
 
+// CSS
+import "../img_hover.css"
+
 const PostDetails = () => {
   const { id } = useParams(); // Pobierz id z URL
   const [post, setPost] = useState(null);
@@ -98,7 +101,6 @@ const PostDetails = () => {
         throw new Error("Nie udało się dodać komentarza");
       }
 
-      const addedComment = await response.json();
       setComments([...comments, commentToAdd]); // Aktualizuj lokalną listę komentarzy
       setNewComment(""); // Resetuj pole formularza
       setSuccess("Dodano komentarz pomyślnie!");
@@ -207,18 +209,27 @@ const PostDetails = () => {
               {comments.map((comment) => (
                 <ListGroup.Item key={comment.id}>
                     <Row>
-                    <strong>
-                    {users.find( (user) => Number(user.id) === Number(comment.CommentUserId))?.UserName || "Nieznany"}
-                  </strong>
-                  {comment.CommentContent}
-                  {
-                    (admin === 'true') ? (
-                      <Button variant="danger" onClick={() => handleShowDeleteModal(comment.id)}>
-                        Usuń komentarz
-                      </Button>
-                    ) : (<></>)
-                  }
-                    </Row>
+                    <Col>
+                      <strong>
+                        {users.find((user) => Number(user.id) === Number(comment.CommentUserId))?.UserName || "Nieznany"}
+                      </strong>
+                      <div>{comment.CommentContent}</div>
+                    </Col>
+                    <Col>
+                      <div className="d-flex flex-column">
+                        {/* Treść komentarza */}
+                        
+
+                        {/* Przyciski do usuwania komentarza, tylko jeśli użytkownik jest administratorem lub to jego komentarz */}
+                        {((admin === 'true') || (Number(comment.CommentUserId) === Number(user.id))) && (
+                          <Button variant="danger" onClick={() => handleShowDeleteModal(comment.id)} style={{ width: 'auto', marginTop: '10px' }}>
+                            Usuń komentarz
+                          </Button>
+                        )}
+                      </div>
+                    </Col>
+                  </Row>
+
                   
                 </ListGroup.Item>
               ))}

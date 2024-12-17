@@ -4,7 +4,11 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
-import { Modal } from "react-bootstrap";
+import { Modal, Col } from "react-bootstrap";
+
+// CSS
+import "../card_style.css" // Card
+import "../button_style.css" // Buttons
 
 
 const Post = () => {
@@ -84,84 +88,111 @@ const Post = () => {
   }
 
   return (
-    <Container>
-      <Row>
-        {posts.slice().reverse().map((post) => (
-          <Card style={{ width: "18rem" }} key={post.Id} className="m-3">
-            <Card.Body>
-              <Card.Title>{post.PostTitle}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                Autor: {post.user ? post.user.UserName : "Nieznany"} {/* Obsługa braku danych */}
-              </Card.Subtitle>
-
-              {/* Zastosowanie overflow, aby treść posta nie wychodziła poza kartę */}
-              <Card.Text style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                {post.PostContent}
-              </Card.Text>
-
-              <Button variant="primary" href={`/posts/${post.id}`}>
+    <Container className="my-5">
+  {/* Wyśrodkowanie zawartości */}
+  <Row className="gx-4 gy-4 justify-content-center">
+    {posts.slice().reverse().map((post) => (
+      <Col
+      key={post.Id}
+      md={4} /* 3 kolumny w jednym rzędzie na średnich i większych ekranach */
+      sm={6} /* 2 kolumny na mniejszych ekranach */
+      xs={12} /* 1 kolumna na małych ekranach */
+      className="d-flex align-items-stretch"
+    >
+        <Card className="h-100 shadow-sm w-100 my-card">
+          <Card.Body className="d-flex flex-column">
+            <Card.Title className="text-center mb-3" style={{ fontWeight: "600" }}>
+              {post.PostTitle}
+            </Card.Title>
+            <Card.Subtitle className="mb-2 text-muted text-center">
+              Autor: {post.user ? post.user.UserName : "Nieznany"}
+            </Card.Subtitle>
+            <Card.Text
+              className="text-muted"
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                display: "-webkit-box",
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {post.PostContent}
+            </Card.Text>
+            <div className="mt-auto d-flex justify-content-between">
+              <Button
+                variant="primary"
+                size="m" /* Zastosowanie mniejszego rozmiaru */
+                href={`/posts/${post.id}`}
+              >
                 Przejdź do artykułu
               </Button>
-
-              {/* Wyświetlanie przycisku do polubień, otwierającego modal */}
-              <Button variant="success" onClick={() => handleShowLikes(post.likes)}>
+              <Button
+                variant="success"
+                size="m" /* Zastosowanie mniejszego rozmiaru */
+                onClick={() => handleShowLikes(post.likes)}
+              >
                 Polubienia
               </Button>
+            </div>
 
-              {(admin === 'true') ? (
-
-                <Button variant="danger" onClick={() => handleShowDeleteModal(post.id)}>
+            {admin === "true" && (
+              <div className="d-flex justify-content-center mt-2">
+                <Button
+                  variant="danger"
+                  size="m" /* Zastosowanie mniejszego rozmiaru */
+                  onClick={() => handleShowDeleteModal(post.id)}
+                >
                   Usuń post
                 </Button>
-              ) : (
-                  <></>
-              )}
-              
-              
-            </Card.Body>
-          </Card>
-        ))}
-      </Row>
-
-      {/* Modal wyświetlający użytkowników, którzy polubili post */}
-      <Modal show={showModal} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Polubienia</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Wyświetlamy listę użytkowników, którzy polubili post */}
-          <ul>
-            {likedUsers.length === 0 ? (
-              <li>Brak polubień</li>
-            ) : (
-              likedUsers.map((username, index) => <li key={index}>{username}</li>)
+              </div>
             )}
-          </ul>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Zamknij
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </Card.Body>
+        </Card>
+      </Col>
+    ))}
+  </Row>
 
-      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Potwierdzenie usunięcia</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Czy na pewno chcesz usunąć ten post? Ta operacja jest nieodwracalna.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseDeleteModal}>
-            Anuluj
-          </Button>
-          <Button variant="danger" onClick={handleDeletePost}>
-            Usuń
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </Container>
+  {/* Modal wyświetlający użytkowników, którzy polubili post */}
+  <Modal show={showModal} onHide={handleCloseModal}>
+    <Modal.Header closeButton>
+      <Modal.Title>Polubienia</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <ul>
+        {likedUsers.length === 0 ? (
+          <li>Brak polubień</li>
+        ) : (
+          likedUsers.map((username, index) => <li key={index}>{username}</li>)
+        )}
+      </ul>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleCloseModal}>
+        Zamknij
+      </Button>
+    </Modal.Footer>
+  </Modal>
+
+  {/* Modal potwierdzenia usunięcia */}
+  <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+    <Modal.Header closeButton>
+      <Modal.Title>Potwierdzenie usunięcia</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      Czy na pewno chcesz usunąć ten post? Ta operacja jest nieodwracalna.
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleCloseDeleteModal}>
+        Anuluj
+      </Button>
+      <Button variant="danger" onClick={handleDeletePost}>
+        Usuń
+      </Button>
+    </Modal.Footer>
+  </Modal>
+</Container>
+
 
     
   );

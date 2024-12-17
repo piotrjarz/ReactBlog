@@ -1,0 +1,48 @@
+/* Podstawowe style przycisków */
+.btn-custom {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #fff; /* Biały tekst */
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient niebieski */
+    border: none;
+    border-radius: 8px; /* Zaokrąglenie */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Efekt hover */
+  .btn-custom:hover {
+    background: linear-gradient(135deg, #0056b3, #004085); /* Ciemniejszy gradient */
+    transform: translateY(-3px); /* Podniesienie przycisku */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Efekt kliknięcia */
+  .btn-custom:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Przyciski z innymi kolorami */
+  .btn-custom-success {
+    background: linear-gradient(135deg, #28a745, #218838);
+  }
+  
+  .btn-custom-success:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+  }
+  
+  .btn-custom-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+  }
+  
+  .btn-custom-danger:hover {
+    background: linear-gradient(135deg, #c82333, #bd2130);
+  }
+  

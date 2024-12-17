@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
 
+
+// CSS
+import "../button_style.css" // Buttons
+
 const Home = () => {
   const [posts, setPosts] = useState([]);
 
@@ -21,12 +25,16 @@ const Home = () => {
         <Col>
           <Card className="text-white bg-primary mb-3">
             <Card.Body>
-              <h1>Witaj na blogu Goju-Ryu!</h1>
+              <h1>Witaj na blogu o Goju-Ryu!</h1>
               <p>
-                Goju-Ryu to jeden z najbardziej tradycyjnych i cenionych
-                stylów karate, który łączy w sobie twarde (Go) i miękkie (Ju)
-                techniki. Jego korzenie sięgają Okinawy, a jego mistrzowie
-                pozostawili trwały ślad w historii sztuk walki.
+                Karate Goju-Ryu wywodzi się z Okinawy. Został opracowany przez jej mieszkańców - Kanryo Higaonna (1853 - 1916) - styl Naha-te oraz Chojun Miyagi (1888 - 1953) - styl Goju Ryu.
+                Jest on połączeniem tradycyjnego Okinawskiego <i>Okinawa te</i> ze stylami białego żurawia i tygrysa.
+                Okinawa te podzielono na trzy główne style, nazwane po miastach na Okinawie:
+                <ul>
+                  <li>Naha-Te - miękkie techniki, kontrola oddechu, spięcie na końcu. Zawiera w sobie techniki miękkie, takie jak rzuty, chwyty i bloki</li>
+                  <li>Shuri-Te - twardy styl, nastawiony na atak</li>
+                  <li>Tomari-Te - połączenie technik miękkich i twardych z Kempo</li>
+                </ul>
               </p>
             </Card.Body>
           </Card>
@@ -40,11 +48,8 @@ const Home = () => {
             <Card.Body>
               <Card.Title>Historia Goju-Ryu</Card.Title>
               <Card.Text>
-                Goju-Ryu zostało założone przez Chojuna Miyagi w latach 30. XX
-                wieku. Styl ten łączy techniki twarde i miękkie, co czyni go
-                wyjątkowym wśród innych tradycyjnych stylów karate. Jego nazwa
-                dosłownie oznacza „twardą” (Go) i „miękką” (Ju) drogę, co
-                odzwierciedla równowagę między brutalnością i elastycznością.
+                Goju-Ryu oficjalnie zostało utworzone w 1933 przez Chojun'a Miyagiego, kiedy to zostało wpisane w Butokukai, czyli japońskim centrum sztuk walki.
+                Chojun Miyagi wprowadził w 1940 roku podstawowe kata - Gekisai dai Ichi (uderzyć i zniszczyć 1) oraz Gekisai dai Ni (uderzyć i zniszczyć 2). Poza tym opracował kata Tensho (obracające się dłonie) oraz skrócił kata Sanchin (trzy bitwy).
               </Card.Text>
             </Card.Body>
           </Card>
@@ -73,28 +78,44 @@ const Home = () => {
 
       {/* Sekcja z najnowszymi postami */}
       <Row className="my-5">
-        <Col>
-          <h3>Najnowsze wpisy na blogu</h3>
-          <Row>
-            {posts.slice(0, 3).map((post) => (
-              <Col key={post.Id} md={4} className="mb-4">
-                <Card>
-                  <Card.Body>
-                    <Card.Title>{post.PostTitle}</Card.Title>
-                    <Card.Text>
-                      {post.PostContent.slice(0, 100)}... {/* Krótkie
-                      streszczenie */}
-                    </Card.Text>
-                    <Button variant="primary" href={`/posts/${post.id}`}>
-                      Zobacz więcej
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+  <Col>
+    <h3 className="text-center mb-4">Najnowsze wpisy na blogu</h3>
+    <Row className="gx-4 gy-4"> {/* Dodanie odstępów między kolumnami */}
+      {posts.slice().reverse().slice(0,3).map((post) => (
+        <Col key={post.Id} md={4} sm={6} xs={12} className="d-flex align-items-stretch">
+          <Card className="h-100 w-100 shadow-sm">
+            <Card.Body className="d-flex flex-column">
+              <Card.Title className="mb-3" style={{ fontWeight: "600" }}>
+                {post.PostTitle}
+              </Card.Title>
+              <Card.Text
+                className="flex-grow-1"
+                style={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: "vertical",
+                }}
+              >
+                {post.PostContent}
+              </Card.Text>
+              <Button
+                variant="primary"
+                href={`/posts/${post.id}`}
+                className="btn-custom mt-auto"
+              >
+                Przejdź do wpisu
+              </Button>
+            </Card.Body>
+          </Card>
         </Col>
-      </Row>
+      ))}
+    </Row>
+  </Col>
+</Row>
+
+
     </Container>
   );
 };

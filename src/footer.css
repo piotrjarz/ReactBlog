@@ -1,0 +1,18 @@
+/* Ustawienie pełnej wysokości strony */
+html, body, #root {
+    height: 100%; /* Pełna wysokość */
+    margin: 0; /* Usunięcie domyślnego marginesu */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Footer sticky */
+  footer {
+    background-color: #343a40; /* Ciemny kolor footera */
+    color: #ffffff; /* Biały tekst */
+  }
+  
+  a.text-light:hover {
+    color: #17a2b8; /* Bootstrapowy kolor hover */
+  }
+  
