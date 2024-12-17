@@ -9,7 +9,7 @@ const AddPost = () => {
   const [success, setSuccess] = useState(false);
 
   // Pobranie ID użytkownika (zalogowanego) z localStorage
-  const userId = JSON.parse(localStorage.getItem("user"))?.Id;
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,12 +21,16 @@ const AddPost = () => {
     }
 
     try {
+
+      const post = await fetch(`http://localhost:8000/posts`);
+      const postData = await post.json()
+
       const newPost = {
         PostTitle: postTitle,
         PostContent: postContent,
         PostUserId: userId,  // ID zalogowanego użytkownika
         PostLikes: [],  // Możesz dodać mechanizm polubień w przyszłości
-        Id: Date.now().toString(),  // Unikalny identyfikator na podstawie czasu
+        id: String(Number(postData[postData.length-1].id) + 1),  // Unikalny identyfikator na podstawie czasu
       };
 
       // Wysłanie danych do JSON Server (lub innego backendu)

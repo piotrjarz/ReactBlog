@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 const MyPosts = () =>{
     const [posts, setPosts] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user.Id;
+    const userId = user.id;
 
     const fetchPosts = useCallback(async () => {
         const postsResp = await fetch(`http://localhost:8000/posts/?PostUserId=${userId}`);

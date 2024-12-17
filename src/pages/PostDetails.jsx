@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Form, Row, Col, Alert, Card, ListGroup, Button } from "react-bootstrap";
+import { Container, Form, Row, Col, Alert, Card, ListGroup, Button, Modal } from "react-bootstrap";
+import like from "../like.png"
 
 const PostDetails = () => {
   const { id } = useParams(); // Pobierz id z URL
@@ -9,15 +10,21 @@ const PostDetails = () => {
   const [newComment, setNewComment] = useState("");
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
-  const user = JSON.parse(localStorage.getItem("user"));
   const [users, setUsers] = useState([]);
   const [lastCommentId, setLastCommentId] = useState(0);
+  
+  const user = JSON.parse(localStorage.getItem("user"));
+  const admin = localStorage.getItem("admin");
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const [commentToDelete, setCommentToDelete] = useState(null)
 
   useEffect(() => {
     const fetchPostDetails = async () => {
       try {
         // Pobierz post
-        const postResponse = await fetch(`http://localhost:8000/posts/?Id=${id}`);
+        const postResponse = await fetch(`http://localhost:8000/posts/${id}`);
         if (!postResponse.ok) throw new Error("Nie znaleziono takiego wpisu.");
         const postData = await postResponse.json();
 
@@ -26,13 +33,12 @@ const PostDetails = () => {
         `http://localhost:8000/comments?CommentPostId=${id}`
         );
         const commentsData = await commentsResponse.json();
-        //console.log(commentsData);
 
         const commentsIdResponse = await fetch(
             `http://localhost:8000/comments`
         );
         const commentsIdData = await commentsIdResponse.json();
-        setLastCommentId(commentsIdData[commentsIdData.length-1].Id);
+        setLastCommentId(commentsIdData[commentsIdData.length-1].id);
 
         const usersResp = await fetch (
             `http://localhost:8000/users`
@@ -40,12 +46,11 @@ const PostDetails = () => {
 
         const usersData = await usersResp.json();
 
-        const userIds = [...new Set(commentsData.map((comment) => comment.CommentUserId))];
 
-        //console.log(usersData)
-        const userComments = usersData.filter( (user) => userIds.includes(user.Id));
+        const userIds = [...new Set(commentsData.map((comment) => Number(comment.CommentUserId)))];
 
-        //console.log(userComments);
+        const userComments = usersData.filter( (user) => userIds.includes(Number(user.id)));
+
         
 
         
@@ -75,8 +80,8 @@ const PostDetails = () => {
 
     try {
       const commentToAdd = {
-        Id: lastCommentId + 1, // Tymczasowy unikalny ID, można zastąpić automatycznym generowaniem na serwerze
-        CommentUserId: user.Id,
+        id: String(Number(lastCommentId) + 1), // Tymczasowy unikalny ID, można zastąpić automatycznym generowaniem na serwerze
+        CommentUserId: user.id,
         CommentPostId: parseInt(id),
         CommentContent: newComment,
       };
@@ -94,7 +99,7 @@ const PostDetails = () => {
       }
 
       const addedComment = await response.json();
-      setComments([...comments, addedComment]); // Aktualizuj lokalną listę komentarzy
+      setComments([...comments, commentToAdd]); // Aktualizuj lokalną listę komentarzy
       setNewComment(""); // Resetuj pole formularza
       setSuccess("Dodano komentarz pomyślnie!");
     } catch (err) {
@@ -119,15 +124,77 @@ const PostDetails = () => {
     );
   }
 
+  const handleLikePost = async () =>{
+    if(post){
+
+        // Tworzymy nową kopię tablicy polubień
+    const postLikes = post.PostLikes.includes(Number(user.id))
+  ? post.PostLikes.filter((id) => id !== Number(user.id)) // Usuwamy polubienie
+  : [...post.PostLikes, Number(user.id)]; // Dodajemy polubienie
+
+      
+      
+      console.log(`Likes: ${postLikes}`);
+
+      const resp = await fetch(`http://localhost:8000/posts/${post.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body : JSON.stringify({
+          PostLikes: postLikes
+        })
+      })
+      if(resp.ok) {
+        console.log("Sukces!")
+      }
+      setPost((prevPost) => ({
+        ...prevPost,
+        PostLikes: postLikes, // Zaktualizowany stan polubień
+      }));
+    }
+  }
+
+  const handleShowDeleteModal = (commentId) => {
+    setCommentToDelete(commentId);
+    setShowDeleteModal(true);
+  }
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setCommentToDelete(null); // Czyszczymy postToDelete
+  };
+
+  const handleDeleteComment = async () => {
+    if(commentToDelete){
+      const resp = await fetch(`http://localhost:8000/comments/${commentToDelete}`, {
+        method: "DELETE"
+      })
+      if(resp.ok){
+        console.log(`Usunięto komentarz o id = ${commentToDelete}`);
+        setComments(prevComments => prevComments.filter(comment => Number(comment.id) !== Number(commentToDelete)))
+      }
+      else{
+        throw new Error(`Coś poszło nie tak! ${resp.status}`)
+      }
+      handleCloseDeleteModal()
+    }
+
+  }
+
   return (
     <Container className="mt-5">
       <Row>
         <Col>
           <Card>
             <Card.Body>
-              <Card.Title>{post[0].PostTitle}</Card.Title>
-              <Card.Text>{post[0].PostContent}</Card.Text>
+              <Card.Title>{post.PostTitle}</Card.Title>
+              <Card.Text>{post.PostContent}</Card.Text>
             </Card.Body>
+            <Card.Footer>
+              <Card.Text>Podoba ci się ten wpis? Polub go!</Card.Text>
+            <img src={like} alt="like"  style={{width: "30px", height: "30px"}} onClick={handleLikePost}/>
+            </Card.Footer>
           </Card>
         </Col>
       </Row>
@@ -138,12 +205,19 @@ const PostDetails = () => {
           {comments.length > 0 ? (
             <ListGroup>
               {comments.map((comment) => (
-                <ListGroup.Item key={comment.Id}>
+                <ListGroup.Item key={comment.id}>
                     <Row>
                     <strong>
-                    {users.find( (user) => user.Id === comment.CommentUserId)?.UserName || "Nieznany"}
+                    {users.find( (user) => Number(user.id) === Number(comment.CommentUserId))?.UserName || "Nieznany"}
                   </strong>
                   {comment.CommentContent}
+                  {
+                    (admin === 'true') ? (
+                      <Button variant="danger" onClick={() => handleShowDeleteModal(comment.id)}>
+                        Usuń komentarz
+                      </Button>
+                    ) : (<></>)
+                  }
                     </Row>
                   
                 </ListGroup.Item>
@@ -180,11 +254,27 @@ const PostDetails = () => {
         <Row className="mt-4">
           <Col>
             <Alert variant="warning">
-              You must be logged in to add a comment.
+              Musisz być zalogowany, aby skomentować.
             </Alert>
           </Col>
         </Row>
       )}
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Potwierdzenie usunięcia</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Czy na pewno chcesz usunąć ten komentarz? Ta operacja jest nieodwracalna.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Anuluj
+          </Button>
+          <Button variant="danger" onClick={handleDeleteComment}>
+            Usuń
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
 
     </Container>

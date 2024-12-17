@@ -31,18 +31,15 @@ const Profile = () => {
 
     try {
       // Wysłanie żądania zmiany hasła na serwer
-      const response = await fetch(`http://localhost:8000/users/${user.Id}`, {
-        method: "PUT", // lub PATCH, jeśli chcesz częściowo zaktualizować użytkownika
+      const response = await fetch(`http://localhost:8000/users/${user.id}`, {
+        method: "PATCH", // lub PATCH, jeśli chcesz częściowo zaktualizować użytkownika
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          UserEmail: user.UserEmail, // Możemy przechować email w stanie lub w localStorage
-          UserName: user.UserName, // Możemy przechować username w stanie
           UserPassword: newPassword, // Stare hasło
         }),
       });
-
       if (response.ok) {
         setSuccess("Hasło zostało zmienione pomyślnie.");
         // W zależności od backendu, możemy chcieć ponownie zalogować użytkownika

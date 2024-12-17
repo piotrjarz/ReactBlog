@@ -1,146 +1,154 @@
 {
   "gallery": [
     {
-      "Id": 1,
+      "id": "1",
       "ImageName": "TOGKF",
       "ImageURL": "url",
       "ImageDesc": "TOGKF Logo",
-      "ImageAuthorId": 1,
-      "id": "c758"
+      "ImageAuthorId": 1
     }
   ],
   "users": [
     {
-      "Id": 1,
+      "id": "1",
       "UserName": "Admin",
       "UserEmail": "admin@gojublog.pl",
       "UserPassword": "@dm!n#",
-      "UserIsAdmin": true,
-      "id": "f02a"
+      "UserIsAdmin": true
     },
     {
-      "Id": 2,
+      "id": "2",
       "UserName": "GojuFan",
       "UserEmail": "gojufan@gojublog.pl",
       "UserPassword": "maslo123",
-      "UserIsAdmin": true,
-      "id": "c71f"
+      "UserIsAdmin": true
     },
     {
-      "Id": 3,
+      "id": "3",
       "UserName": "Placek",
       "UserEmail": "jacek.placek@gmail.com",
       "UserPassword": "Placek123",
       "UserIsAdmin": false
     },
     {
-      "id": "dba5",
-      "Id": "1",
+      "id": "4",
       "UserName": "Andrew",
       "UserEmail": "andrew@schulz.com",
-      "UserPassword": "andrew123",
+      "UserPassword": "Andrew1234",
       "UserIsAdmin": false
     }
   ],
   "posts": [
     {
-      "Id": 1,
+      "id": "1",
       "PostUserId": 1,
       "PostTitle": "Witam na blogu!",
       "PostContent": "Witam :D\nOto start bloga o tradycyjnym okinawskim karate Goju Ryu.",
       "PostLikes": [
         1
-      ],
-      "id": "dc37"
+      ]
     },
     {
-      "Id": 2,
+      "id": "2",
       "PostUserId": 2,
       "PostTitle": "Kata Gekisai dai ichi",
       "PostContent": "Kata Gekisai dai ichi (uderzyć i zniszczyć numer jeden)",
-      "PostLikes": [],
-      "id": "c852"
+      "PostLikes": []
     },
     {
-      "Id": 3,
+      "id": "3",
       "PostUserId": 2,
       "PostTitle": "Kata Gekisai dai ni",
       "PostContent": "Kata Gekisai dai ni (uderzyć i zniszczyć numer dwa)",
       "PostLikes": [
         1,
         2
-      ],
-      "id": "a407"
+      ]
     },
     {
-      "Id": 4,
+      "id": "4",
       "PostUserId": 1,
       "PostTitle": "Kata Saifa",
       "PostContent": "Kata Saifa (niszczące uderzenie)",
       "PostLikes": [
         1,
         2
-      ],
-      "id": "c1c6"
+      ]
     },
     {
-      "id": "bdce",
+      "id": "5",
       "PostTitle": "Kata Seiyunchin",
       "PostContent": "To bardzo stare kata, jednak wciąż piękne i eleganckie.\nNa sam widok osoby wykonującej kata widać, że korzenie formy sięgają Chin. Prawdopodobne jest, że forma pochodzi z jednego z chińskich systemów samoobrony zwanej Heing. \nPóźniej została sprowadzona na Okinawę i tak jak inne chińskie formy, “przystosowana” do okinawskich warunków. \nWszystkie techniki w kata to techniki ręczne, nie występują tu kopnięcia. Forma wyrabia stabilną i niezłomną postawę. Różne wersje tej formy ćwiczone są w kilku stylach karate, np. Goju Ryu, Shito Ryu. Seiyunchin tłumaczyć można jako “spokojny marsz”.",
       "PostUserId": 2,
-      "PostLikes": [],
-      "Id": 5
+      "PostLikes": []
     }
   ],
   "comments": [
     {
-      "Id": 1,
+      "id": "1",
       "CommentUserId": 1,
       "CommentPostId": 1,
-      "CommentContent": "Zapraszam do dyskusji :D",
-      "id": "0bd2"
+      "CommentContent": "Zapraszam do dyskusji :D"
     },
     {
-      "id": "4f0b",
-      "Id": 2,
+      "id": "2",
       "CommentUserId": 1,
       "CommentPostId": 1,
       "CommentContent": "Testowanie komentarzy"
     },
     {
-      "id": "b4f1",
-      "Id": 1,
+      "id": "3",
       "CommentUserId": 2,
       "CommentPostId": 2,
       "CommentContent": "Moje ulubione kata :D"
     },
     {
-      "id": "280c",
-      "Id": 1,
+      "id": "4",
       "CommentUserId": 2,
       "CommentPostId": 3,
       "CommentContent": "Fajne kata"
     },
     {
-      "id": "6b9a",
-      "Id": 3,
+      "id": "5",
       "CommentUserId": 2,
       "CommentPostId": 1,
       "CommentContent": "Super :D"
     },
     {
-      "id": "0827",
-      "Id": 4,
+      "id": "6",
       "CommentUserId": 2,
       "CommentPostId": 3,
       "CommentContent": "Lubię je"
     },
     {
-      "id": "d43f",
-      "Id": 5,
+      "id": "7",
       "CommentUserId": 2,
       "CommentPostId": 3,
       "CommentContent": "Test"
+    },
+    {
+      "id": "8",
+      "CommentUserId": "1",
+      "CommentPostId": 5,
+      "CommentContent": "Nigger"
+    },
+    {
+      "id": "9",
+      "CommentUserId": "4",
+      "CommentPostId": 4,
+      "CommentContent": "Kolejny test"
+    },
+    {
+      "id": "10",
+      "CommentUserId": "4",
+      "CommentPostId": 4,
+      "CommentContent": "Bruh"
+    },
+    {
+      "id": "11",
+      "CommentUserId": "4",
+      "CommentPostId": 4,
+      "CommentContent": "Aaaa"
     }
   ]
 }

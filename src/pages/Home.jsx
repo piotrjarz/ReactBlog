@@ -85,7 +85,7 @@ const Home = () => {
                       {post.PostContent.slice(0, 100)}... {/* Krótkie
                       streszczenie */}
                     </Card.Text>
-                    <Button variant="primary" href={`/posts/${post.Id}`}>
+                    <Button variant="primary" href={`/posts/${post.id}`}>
                       Zobacz więcej
                     </Button>
                   </Card.Body>

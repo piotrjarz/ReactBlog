@@ -6,13 +6,20 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import { Modal } from "react-bootstrap";
 
+
 const Post = () => {
   let param = useParams();
 
+  const user = JSON.parse(localStorage.getItem("user")).id;
+  const admin = localStorage.getItem("admin");
   // Ustawianie stanu
   const [posts, setPosts] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
+
+
   const [likedUsers, setLikedUsers] = useState([]);
   const [postsData, setPostsData] = useState(posts);
 
@@ -24,49 +31,16 @@ const Post = () => {
     // Pobieranie użytkowników
     const usersResp = await fetch("http://localhost:8000/users");
     const usersData = await usersResp.json();
-
     // Mapowanie postów z użytkownikami
     const postsWithUsers = postsData.map((post) => ({
       ...post,
-      user: usersData.find((user) => user.Id === post.PostUserId), // Dopasowanie użytkownika
-      likes: usersData.filter((user) => post.PostLikes.includes(user.Id))
+      user: usersData.find((user) => Number(user.id) === Number(post.PostUserId)), // Dopasowanie użytkownika
+      likes: usersData.filter((user) => post.PostLikes.includes(Number(user.id)))
     }));
 
     setPosts(postsWithUsers);
   }, []);
 
-  const handleLikePost = async (postId) => {
-    // Sprawdzenie, czy użytkownik już polubił ten post
-    const userId = JSON.parse(localStorage.getItem("user"))?.Id; // Pobranie id użytkownika z localStorage
-
-    if (!userId) {
-      alert("Musisz być zalogowany, aby polubić post!");
-      return;
-    }
-
-    // Zaktualizowanie listy polubień
-    const updatedPosts = postsData.map(post => {
-      if (post.Id === postId) {
-        // Sprawdzenie, czy użytkownik już polubił ten post
-        if (post.PostLikes.some(like => like.UserId === userId)) {
-          post.PostLikes = post.PostLikes.filter(like => like.UserId !== userId); // Usuwanie polubienia
-        } else {
-          post.PostLikes.push({ UserId: userId, UserName: JSON.parse(localStorage.getItem("user")).UserName }); // Dodawanie polubienia
-        }
-      }
-      return post;
-    });
-
-    // Zaktualizowanie stanu i bazy danych (jeśli masz API, możesz zaktualizować backend)
-    setPostsData(updatedPosts);
-
-    //Opcjonalnie, możesz też zaktualizować dane na backendzie, np. za pomocą fetch
-    await fetch(`http://localhost:8000/posts/?Id=${postId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ PostLikes: likedUsers })
-    });
-  };
 
 
   useEffect(() => {
@@ -80,6 +54,34 @@ const Post = () => {
   };
 
   const handleCloseModal = () => setShowModal(false);
+
+  const handleDeletePost = async () => {
+    if(postToDelete){
+      const resp = await fetch(`http://localhost:8000/posts/${postToDelete}`, {
+        method: "DELETE"
+      })
+      if(resp.ok){
+        console.log(`Usunięto post o id = ${postToDelete}`);
+        setPosts(prevPosts => prevPosts.filter(post => Number(post.id) !== Number(postToDelete)))
+      }
+      else{
+        throw new Error(`Coś poszło nie tak! ${resp.status}`)
+      }
+      handleCloseDeleteModal()
+    }
+
+  }
+
+  const handleShowDeleteModal = (postId) => {
+    setPostToDelete(postId); // Ustawiamy post do usunięcia
+    setShowDeleteModal(true); // Pokazujemy modal
+  };
+
+  const handleCloseDeleteModal = () =>{
+    setShowDeleteModal(false);
+    setPostToDelete(null);
+
+  }
 
   return (
     <Container>
@@ -97,7 +99,7 @@ const Post = () => {
                 {post.PostContent}
               </Card.Text>
 
-              <Button variant="primary" href={`/posts/${post.Id}`}>
+              <Button variant="primary" href={`/posts/${post.id}`}>
                 Przejdź do artykułu
               </Button>
 
@@ -105,6 +107,17 @@ const Post = () => {
               <Button variant="success" onClick={() => handleShowLikes(post.likes)}>
                 Polubienia
               </Button>
+
+              {(admin === 'true') ? (
+
+                <Button variant="danger" onClick={() => handleShowDeleteModal(post.id)}>
+                  Usuń post
+                </Button>
+              ) : (
+                  <></>
+              )}
+              
+              
             </Card.Body>
           </Card>
         ))}
@@ -131,7 +144,26 @@ const Post = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Potwierdzenie usunięcia</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Czy na pewno chcesz usunąć ten post? Ta operacja jest nieodwracalna.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Anuluj
+          </Button>
+          <Button variant="danger" onClick={handleDeletePost}>
+            Usuń
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
+
+    
   );
 };
 
